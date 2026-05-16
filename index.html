@@ -309,10 +309,17 @@
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            section { padding: 2rem; }
+            header { padding: 4rem 1rem 2rem 1rem; }
+            .container { padding: 0 1rem 2rem 1rem; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            section { padding: 1.5rem; border-radius: 20px; }
+            .service-grid { grid-template-columns: 1fr; }
             .contact-links { flex-direction: column; }
-            .contact-links a { justify-content: center; }
+            .contact-links a { justify-content: center; width: 100%; box-sizing: border-box; }
+            table { font-size: 0.9rem; }
+            th, td { padding: 0.8rem 0.5rem; }
+            .bio-header h3 { font-size: 1.5rem; }
         }
     </style>
 </head>
