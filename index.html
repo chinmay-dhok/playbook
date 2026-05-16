@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic IT & Cloud Security Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Material 3 Dark Colors */
+            --md-sys-color-background: #0f1115;
+            --md-sys-color-on-background: #e1e2e8;
+            --md-sys-color-primary: #a8c7fa;
+            --md-sys-color-secondary: #c2c7cf;
+            --md-sys-color-tertiary: #38bdf8;
+            --md-sys-color-surface: rgba(20, 22, 27, 0.6);
+            --md-sys-color-surface-variant: rgba(68, 71, 78, 0.4);
+            --md-sys-color-outline: rgba(142, 145, 153, 0.2);
+            --glass-blur: blur(24px);
+        }
+
+        [data-theme="light"] {
+            /* Material 3 Light Colors */
+            --md-sys-color-background: #f8fafc;
+            --md-sys-color-on-background: #0f172a;
+            --md-sys-color-primary: #2563eb;
+            --md-sys-color-secondary: #475569;
+            --md-sys-color-tertiary: #0ea5e9;
+            --md-sys-color-surface: rgba(255, 255, 255, 0.7);
+            --md-sys-color-surface-variant: rgba(241, 245, 249, 0.6);
+            --md-sys-color-outline: rgba(148, 163, 184, 0.3);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Abstract blurred background shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 20s infinite ease-in-out alternate;
+            transition: background-color 0.3s ease;
+        }
+        .shape-1 {
+            width: 400px; height: 400px;
+            background: rgba(168, 199, 250, 0.3);
+            top: -100px; left: -100px;
+        }
+        [data-theme="light"] .shape-1 { background: rgba(37, 99, 235, 0.2); }
+        
+        .shape-2 {
+            width: 500px; height: 500px;
+            background: rgba(56, 189, 248, 0.2);
+            bottom: 100px; right: -150px;
+            animation-delay: -10s;
+        }
+        [data-theme="light"] .shape-2 { background: rgba(14, 165, 233, 0.15); }
+
+        .shape-3 {
+            width: 300px; height: 300px;
+            background: rgba(194, 199, 207, 0.2);
+            top: 40%; left: 30%;
+            animation-delay: -5s;
+        }
+        [data-theme="light"] .shape-3 { background: rgba(37, 99, 235, 0.1); }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        /* Theme Toggle Button */
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--md-sys-color-surface-variant);
+            border: 1px solid var(--md-sys-color-outline);
+            color: var(--md-sys-color-on-background);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        #theme-toggle:hover {
+            transform: scale(1.1);
+            border-color: var(--md-sys-color-primary);
+        }
+
+        header {
+            padding: 6rem 2rem 4rem 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--md-sys-color-primary);
+            letter-spacing: -1px;
+            transition: color 0.3s ease;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--md-sys-color-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem 2rem;
+        }
+
+        /* Glassmorphism Cards */
+        section {
+            background-color: var(--md-sys-color-surface);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 28px;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-4px);
+            border-color: rgba(168, 199, 250, 0.4);
+        }
+        [data-theme="light"] section:hover {
+            border-color: rgba(37, 99, 235, 0.4);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background-color: var(--md-sys-color-surface-variant);
+            border-radius: 20px;
+            padding: 1.8rem;
+            border: 1px solid var(--md-sys-color-outline);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .service-card h3 {
+            color: var(--md-sys-color-primary);
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .service-card p {
+            color: var(--md-sys-color-secondary);
+            font-weight: 300;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .service-card ul {
+            padding-left: 1.2rem;
+            margin: 0;
+            color: var(--md-sys-color-on-background);
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        .service-card li {
+            margin-bottom: 0.6rem;
+        }
+
+        .highlight-text {
+            color: var(--md-sys-color-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1.2rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--md-sys-color-outline);
+            transition: border-color 0.3s ease;
+        }
+
+        th {
+            color: var(--md-sys-color-tertiary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        /* About Me Section */
+        .about-me {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .bio-header h3 {
+            font-size: 2rem;
+            color: var(--md-sys-color-on-background);
+            margin: 0 0 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .bio-role {
+            color: var(--md-sys-color-primary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin: 0 0 1rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .bio-mission {
+            color: var(--md-sys-color-tertiary);
+            font-style: italic;
+            border-left: 3px solid var(--md-sys-color-tertiary);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .bio-text {
+            color: var(--md-sys-color-secondary);
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--md-sys-color-surface-variant);
+            color: var(--md-sys-color-on-background);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            border: 1px solid var(--md-sys-color-outline);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-links a:hover {
+            background-color: rgba(168, 199, 250, 0.15);
+            border-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-primary);
+        }
+
+        .contact-links svg {
+            width: 20px; height: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            section { padding: 2rem; }
+            .contact-links { flex-direction: column; }
+            .contact-links a { justify-content: center; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <button id="theme-toggle" aria-label="Toggle Dark Mode">
+        <svg id="sun-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg id="moon-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <header>
+        <div class="content">
+            <h1>Strategic IT & Cloud Security Solutions</h1>
+            <p class="subtitle">Comprehensive managed services designed to harden your infrastructure, optimize cloud operations, and scale your business securely.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>1. The Value Proposition</h2>
+            <p style="font-size: 1.1rem; font-weight: 300; color: var(--md-sys-color-secondary);">Enterprise clients do not buy commodities; they buy <span class="highlight-text">risk mitigation and operational efficiency</span>. By combining hardware procurement with deep security architecture and managed staffing, we act as a singular point of accountability for a company's entire infrastructure layer.</p>
+            
+            <div class="service-grid" style="margin-top: 2rem;">
+                <div class="service-card">
+                    <h3 style="color: var(--md-sys-color-tertiary);">The Delivery Engine</h3>
+                    <p style="margin: 0;">Led by technical leadership with extensive experience managing vendor ecosystems, zero-trust cloud environments (GCP), GitHub automation, and JIT access models.</p>
+                </div>
+                <div class="service-card">
+                    <h3 style="color: var(--md-sys-color-tertiary);">The Sales Engine</h3>
+                    <p style="margin: 0;">Driven by executive leadership with a proven track record of scaling revenue and closing high-value enterprise contracts.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Core Service Catalog</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        Hardware & Endpoint Solutions
+                    </h3>
+                    <p>Moving beyond basic brokering to full-lifecycle asset management.</p>
+                    <ul>
+                        <li><span class="highlight-text">Zero-Touch Deployment:</span> Direct procurement of Dell/Lenovo assets, pre-configured with MDM and endpoint security.</li>
+                        <li><span class="highlight-text">IT Asset Management (ITAM):</span> Ongoing tracking of hardware lifecycles, warranties, and software compliance.</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <h3>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        Network & Perimeter Security
+                    </h3>
+                    <p>Designing and deploying secure connectivity for scaling corporate networks.</p>
+                    <ul>
+                        <li><span class="highlight-text">Secure Branch Connectivity:</span> Deployment and configuration of Fortinet Next-Generation Firewalls (NGFW) and UDM Pro enterprise gear.</li>
+                        <li><span class="highlight-text">Unified Threat Management:</span> Ongoing subscription-based monitoring of network traffic, access policies, and threat definitions.</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Cybersecurity & Cloud Infra
+                    </h3>
+                    <p>Identifying vulnerabilities and implementing the architecture to resolve them.</p>
+                    <ul>
+                        <li><span class="highlight-text">Managed VAPT:</span> Regular Vulnerability Assessment and Penetration Testing. We remediate the findings as a fractional security team.</li>
+                        <li><span class="highlight-text">Zero-Trust & Identity Access:</span> Implementation of JIT access models and secure cloud provisioning (GCP/AWS).</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        Strategic Human Capital
+                    </h3>
+                    <p>Providing the technical talent required to maintain and scale operations.</p>
+                    <ul>
+                        <li><span class="highlight-text">Third-Party Payroll Staffing:</span> Deployment of L1/L2 Support Engineers, Network Administrators, and Security Analysts.</li>
+                        <li><span class="highlight-text">Project-Based Technical Teams:</span> Sourcing specialized engineers for infrastructure overhauls or cloud migrations.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Service Bundles</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--md-sys-color-secondary); font-weight: 300;">We offer outcome-driven service packages tailored to the specific maturity stage and compliance needs of your organization.</p>
+            
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bundle Name</th>
+                            <th>Target Audience</th>
+                            <th>Included Services</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="highlight-text">The Launchpad</span></td>
+                            <td style="color: var(--md-sys-color-secondary);">Rapidly scaling startups setting up new offices.</td>
+                            <td style="color: var(--md-sys-color-secondary);">Hardware Procurement + MDM Setup + Basic UDM Pro Networking + IT Staffing (L1 Support).</td>
+                        </tr>
+                        <tr>
+                            <td><span class="highlight-text">The Fortress</span></td>
+                            <td style="color: var(--md-sys-color-secondary);">Fintech, Healthtech, and compliance-heavy firms.</td>
+                            <td style="color: var(--md-sys-color-secondary);">Fortinet Firewall Deployment + Quarterly VAPT + Zero-Trust Cloud Access Setup.</td>
+                        </tr>
+                        <tr>
+                            <td><span class="highlight-text">The Scaler</span></td>
+                            <td style="color: var(--md-sys-color-secondary);">Large enterprises optimizing operational overhead.</td>
+                            <td style="color: var(--md-sys-color-secondary);">SaaS License Audit + Large-scale Staff Augmentation + Cloud Infrastructure Optimization.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. Our Commitment to Delivery</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--md-sys-color-secondary); font-weight: 300;">To ensure scalable and reliable service delivery, we operate under the following rigorous standards:</p>
+            
+            <ul style="color: var(--md-sys-color-secondary); padding-left: 1.2rem; font-weight: 300;">
+                <li style="margin-bottom: 1rem;"><span class="highlight-text">OEM Partnerships:</span> We are officially registered with top-tier OEM partners (Dell, Lenovo, Fortinet) to provide you with the best hardware at the most competitive rates.</li>
+                <li style="margin-bottom: 1rem;"><span class="highlight-text">Strict SLAs:</span> All managed services are bound by transparent SLAs defining guaranteed response times, hardware replacement windows, and security patching cadences.</li>
+                <li><span class="highlight-text">Dedicated Engineering Focus:</span> Our technical teams focus exclusively on architecture, SLA enforcement, and uninterrupted service delivery, ensuring your infrastructure is always in expert hands.</li>
+            </ul>
+        </section>
+
+        <section class="about-me">
+            <h2>5. About Me & Contact</h2>
+            <div class="bio-header">
+                <h3>Chinmay Dhok</h3>
+                <p class="bio-role">Senior Information Security Analyst | Cloud Infrastructure Expert | Technical Leader</p>
+                <p class="bio-mission">Security Professional | Cloud Orchestrator | Simplifying Connectivity & Empowering Teams</p>
+            </div>
+            
+            <p class="bio-text">Security professional focused on hardening cloud infrastructure and enforcing rigorous governance standards. Combines operational expertise with strategic risk management to build secure, scalable systems that bridge the gap between high-velocity engineering and compliance.</p>
+            
+            <h4 style="color: var(--md-sys-color-primary); font-size: 1.2rem; margin: 1.5rem 0 1rem 0; font-weight: 500;">Highlights of career include:</h4>
+            <ul style="color: var(--md-sys-color-secondary); padding-left: 1.2rem; font-weight: 300;">
+                <li style="margin-bottom: 0.6rem;">Orchestration of platform-wide compliance strategies (ISO 27001, SOC 2, GDPR) and mitigation of critical supply chain risks to harden the software development lifecycle.</li>
+                <li style="margin-bottom: 0.6rem;">Successful migration of 200+ workloads to Azure DevOps, resulting in a 15% efficiency boost and a 20% cost reduction.</li>
+                <li style="margin-bottom: 0.6rem;">Design and implementation of a secure network architecture for a 1500-person workforce, enhancing stability and reducing security vulnerabilities.</li>
+                <li style="margin-bottom: 0.6rem;">Management of cross-location teams of 20+ members, fostering collaboration and consistently delivering projects on time and within budget.</li>
+                <li>Deeply passionate about bridging the gap between high-velocity cloud technologies and rigorous security governance to share knowledge with the community.</li>
+            </ul>
+
+            <div class="contact-links">
+                <a href="mailto:chinmaydhok2013@gmail.com">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M22 6l-10 7L2 6"></path></svg>
+                    chinmaydhok2013@gmail.com
+                </a>
+                <a href="tel:+917023755730">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    +91 7023755730
+                </a>
+                <a href="https://linkedin.com/in/chinmaydhok" target="_blank">
+                    <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    LinkedIn Profile
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        // Initialize theme from localStorage or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.body.setAttribute('data-theme', savedTheme);
+        updateIcons(savedTheme);
+
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            updateIcons(newTheme);
+        });
+
+        function updateIcons(theme) {
+            if (theme === 'dark') {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            } else {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
