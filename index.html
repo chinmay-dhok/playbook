@@ -41,6 +41,7 @@
             overflow-x: hidden;
             position: relative;
             transition: background-color 0.3s ease, color 0.3s ease;
+            scroll-behavior: smooth;
         }
 
         /* Abstract blurred background shapes */
@@ -81,11 +82,7 @@
             100% { transform: translate(50px, 50px) scale(1.1); }
         }
 
-        /* Theme Toggle Button */
         #theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
             background: var(--md-sys-color-surface-variant);
             border: 1px solid var(--md-sys-color-outline);
             color: var(--md-sys-color-on-background);
@@ -96,7 +93,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: 1000;
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             transition: all 0.3s ease;
@@ -105,6 +101,73 @@
         #theme-toggle:hover {
             transform: scale(1.1);
             border-color: var(--md-sys-color-primary);
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: var(--md-sys-color-surface);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--md-sys-color-outline);
+            padding: 1rem 0;
+            display: flex;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .navbar-content {
+            max-width: 1000px;
+            width: 100%;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--md-sys-color-on-background);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links a.nav-item {
+            color: var(--md-sys-color-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a.nav-item:hover {
+            color: var(--md-sys-color-primary);
+        }
+
+        .nav-btn {
+            background: linear-gradient(90deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+            color: #0f1115 !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(168, 199, 250, 0.4);
         }
 
         header {
@@ -325,10 +388,21 @@
 </head>
 <body data-theme="dark">
 
-    <button id="theme-toggle" aria-label="Toggle Dark Mode">
-        <svg id="sun-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg id="moon-icon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-    </button>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="#" class="nav-brand">Chinmay Dhok</a>
+            <div class="nav-links">
+                <a href="#competencies" class="nav-item">Competencies</a>
+                <a href="#frameworks" class="nav-item">Frameworks</a>
+                <a href="#about" class="nav-item">About</a>
+                <a href="https://chinmay-dhok.github.io/resume/" class="nav-btn" target="_blank">View Resumes</a>
+                <button id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <svg id="sun-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg id="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
 
     <div class="bg-shape shape-1"></div>
     <div class="bg-shape shape-2"></div>
@@ -358,7 +432,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="competencies">
             <h2>2. Core Competencies & Capabilities</h2>
             <div class="service-grid">
                 <div class="service-card">
@@ -411,7 +485,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="frameworks">
             <h2>3. Execution Scenarios & Frameworks</h2>
             <p style="margin-bottom: 1.5rem; color: var(--md-sys-color-secondary); font-weight: 300;">Outcome-driven implementation frameworks tailored to the specific maturity stage and compliance needs of the organization.</p>
             
@@ -456,7 +530,7 @@
             </ul>
         </section>
 
-        <section class="about-me">
+        <section id="about" class="about-me">
             <h2>5. About Me & Contact</h2>
             <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
                 <img src="ChinmayDhok.jpeg" alt="Chinmay Dhok" style="width: 150px; height: 150px; border-radius: 20px; object-fit: cover; border: 2px solid var(--md-sys-color-primary);">
